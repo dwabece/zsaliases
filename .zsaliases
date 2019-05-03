@@ -1,0 +1,99 @@
+
+CL_ALIAS=195
+function list_aliasses() {
+    echo "Here's your aliasses, dziwko:"
+    while read -r line ; do
+        print -P "$line" | cut -c8-
+    done < <(grep '^#alias' ~/.zsaliases)
+}
+
+#alias %{$FG[$CL_ALIAS]%}edshell%{$reset_color%} - opens your .zshrc file in sublime
+alias edshell="st ~/.zshrc"
+#alias %{$FG[$CL_ALIAS]%}rmpyc%{$reset_color%} - removes *.pyc files recursively
+alias rmpyc="find . -iname '*.pyc' | xargs rm -rf"
+alias lsalias=list_aliasses
+alias lsl=lsalias
+
+
+function lsgrep() {
+    if [ -z "$1" ]; then
+        print 'No grep filter supplied 🤦'
+        return
+    fi
+    ls -all | grep $1
+}
+
+function historygrep() {
+    if [ -z "$1" ]; then
+        print 'No grep filter supplied 🤦'
+        return
+    fi
+    history | grep $1
+}
+
+
+function mkcd_() {
+    if [ -z "$1" ]; then
+        print 'You need to specify dir name first'
+        return
+    fi
+    mkdir $1
+    cd $1
+}
+
+function cd_and_list() {
+    if [ -z "$1" ]; then
+        print 'You need to specify dir name first'
+        return
+    fi
+    cd $1
+    ll
+}
+
+function ps_grep() {
+    if [ -z "$1" ]; then
+        print 'You need to specify grep filter first'
+        return
+    fi
+    ps aux | grep $1
+}
+
+function simple_http_server() {
+    PORT=8000
+
+    if [[ `pwd` = $HOME ]]; then
+        echo 'You cant run that in your home directory 🤦🏻'
+        return
+    fi
+
+    echo "Launching HTTP Server...  🖥️  📡"
+    res=$(ifconfig | grep "inet " | grep -v '127' | awk '{print $2}')
+
+    echo $res | while read -r single_ip; do
+        echo ">> http://$single_ip:$PORT"
+    done
+    echo ""
+
+    python -m SimpleHTTPServer
+}
+
+#alias %{$FG[$CL_ALIAS]%}cdl%{$reset_color%} - cd and display directory
+alias cdl=cd_and_list
+#alias %{$FG[$CL_ALIAS]%}mkcd%{$reset_color%} - create and enter newly created directory
+alias mkcd=mkcd_
+#alias %{$FG[$CL_ALIAS]%}lsg%{$reset_color%} - grep list of files in current directory
+alias lsg=lsgrep
+#alias %{$FG[$CL_ALIAS]%}psg%{$reset_color%} - grep list of processes
+alias psg=ps_grep
+#alias %{$FG[$CL_ALIAS]%}hsg%{$reset_color%} - grep zsh history
+alias hsg=historygrep
+#alias %{$FG[$CL_ALIAS]%}lll%{$reset_color%} - lists all files
+alias lll='ls -all'
+#alias %{$FG[$CL_ALIAS]%}serv%{$reset_color%} - runs simple http server
+alias serv=simple_http_server
+#alias %{$FG[$CL_ALIAS]%}usedports%{$reset_color%} - grep list of opened ports
+alias usedports='lsof -i -P -n | grep LISTEN'
+#alias %{$FG[$CL_ALIAS]%}portz%{$reset_color%} - for usedportz
+alias portz=usedports
+#alias %{$FG[$CL_ALIAS]%}mkvirtualenv3%{$reset_color%} - creates python3 virtualenv
+alias mkvirtualenv3="mkvirtualenv --python=`which python3`"
