@@ -4,7 +4,7 @@ function list_aliasses() {
     echo "Here's your aliasses, dziwko:"
     while read -r line ; do
         print -P "$line" | cut -c8-
-    done < <(grep '^#alias' ~/.zsaliases)
+    done < <(grep '^#alias' ~/zsaliases/.zsaliases)
 }
 
 #alias %{$FG[$CL_ALIAS]%}edshell%{$reset_color%} - opens your .zshrc file in sublime
@@ -59,7 +59,13 @@ function ps_grep() {
 }
 
 function simple_http_server() {
-    PORT=8000
+    # PY_VER=`python --version | awk '$2'`
+    if [ -z "$PORT" ]
+    then
+        PORT="8000"
+    fi
+
+    print "RUNNING IN PORT $PORT"
 
     if [[ `pwd` = $HOME ]]; then
         echo 'You cant run that in your home directory 🤦🏻'
@@ -74,26 +80,41 @@ function simple_http_server() {
     done
     echo ""
 
-    python -m SimpleHTTPServer
+    # python -m SimpleHTTPServer
+    python -m http.server $PORT
 }
 
 #alias %{$FG[$CL_ALIAS]%}cdl%{$reset_color%} - cd and display directory
 alias cdl=cd_and_list
+
 #alias %{$FG[$CL_ALIAS]%}mkcd%{$reset_color%} - create and enter newly created directory
 alias mkcd=mkcd_
+
 #alias %{$FG[$CL_ALIAS]%}lsg%{$reset_color%} - grep list of files in current directory
 alias lsg=lsgrep
+
 #alias %{$FG[$CL_ALIAS]%}psg%{$reset_color%} - grep list of processes
 alias psg=ps_grep
+
 #alias %{$FG[$CL_ALIAS]%}hsg%{$reset_color%} - grep zsh history
 alias hsg=historygrep
+
 #alias %{$FG[$CL_ALIAS]%}lll%{$reset_color%} - lists all files
 alias lll='ls -all'
+
 #alias %{$FG[$CL_ALIAS]%}serv%{$reset_color%} - runs simple http server
 alias serv=simple_http_server
+
 #alias %{$FG[$CL_ALIAS]%}usedports%{$reset_color%} - grep list of opened ports
 alias usedports='lsof -i -P -n | grep LISTEN'
 #alias %{$FG[$CL_ALIAS]%}portz%{$reset_color%} - for usedportz
 alias portz=usedports
+
 #alias %{$FG[$CL_ALIAS]%}mkvirtualenv3%{$reset_color%} - creates python3 virtualenv
 alias mkvirtualenv3="mkvirtualenv --python=`which python3`"
+
+#alias %{$FG[$CL_ALIAS]%}rmf%{$reset_color%} - alias for rm -rf
+alias rmf="rm -rf"
+
+#alias %{$FG[$CL_ALIAS]%}p%{$reset_color%} - runs python interpreter
+alias p=python
