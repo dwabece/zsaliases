@@ -1,7 +1,7 @@
 
 CL_ALIAS=195
 function list_aliasses() {
-    echo "Here's your aliasses, dziwko:"
+    echo "Here's your aliasses:"
     while read -r line ; do
         print -P "$line" | cut -c8-
     done < <(grep '^#alias' ~/zsaliases/.zsaliases)
@@ -17,7 +17,7 @@ alias lsl=lsalias
 
 function lsgrep() {
     if [ -z "$1" ]; then
-        print 'No grep filter supplied 🤦'
+        print 'No grep filter supplied 🤦🏻'
         return
     fi
     ls -all | grep $1
@@ -25,7 +25,7 @@ function lsgrep() {
 
 function historygrep() {
     if [ -z "$1" ]; then
-        print 'No grep filter supplied 🤦'
+        print 'No grep filter supplied 🤦🏻'
         return
     fi
     history | grep $1
@@ -84,7 +84,7 @@ function simple_http_server() {
     python -m http.server $PORT
 }
 
-#alias %{$FG[$CL_ALIAS]%}cdl%{$reset_color%} - cd and display directory
+#alias %{$FG[$CL_ALIAS]%}cdl%{$reset_color%} - cd and display directory contents
 alias cdl=cd_and_list
 
 #alias %{$FG[$CL_ALIAS]%}mkcd%{$reset_color%} - create and enter newly created directory
