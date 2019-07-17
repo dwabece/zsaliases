@@ -4,7 +4,7 @@ function list_aliasses() {
     echo "Here's your aliasses:"
     while read -r line ; do
         print -P "$line" | cut -c8-
-    done < <(grep '^#alias' ~/zsaliases/.zsaliases)
+    done < <(grep '^#alias' ~/.zsaliases/zsaliases)
 }
 
 #alias %{$FG[$CL_ALIAS]%}edshell%{$reset_color%} - opens your .zshrc file in sublime
@@ -80,8 +80,8 @@ function simple_http_server() {
     done
     echo ""
 
-    # python -m SimpleHTTPServer
-    python -m http.server $PORT
+    #python -m SimpleHTTPServer
+    python3 -m http.server $PORT
 }
 
 #alias %{$FG[$CL_ALIAS]%}cdl%{$reset_color%} - cd and display directory contents
@@ -117,4 +117,11 @@ alias mkvirtualenv3="mkvirtualenv --python=`which python3`"
 alias rmf="rm -rf"
 
 #alias %{$FG[$CL_ALIAS]%}p%{$reset_color%} - runs python interpreter
-alias p=python
+alias p=python3
+
+#alias %{$FG[$CL_ALIAS]%}bs%{$reset_color%} - brew search
+alias bs="brew search"
+#alias %{$FG[$CL_ALIAS]%}bi%{$reset_color%} - brew install
+alias bi="brew install"
+#alias %{$FG[$CL_ALIAS]%}bic%{$reset_color%} - brew cask install
+alias bic="brew cask install"
