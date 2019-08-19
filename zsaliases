@@ -7,10 +7,6 @@ function list_aliasses() {
     done < <(grep '^#alias' ~/.zsaliases/zsaliases)
 }
 
-#alias %{$FG[$CL_ALIAS]%}edshell%{$reset_color%} - opens your .zshrc file in sublime
-alias edshell="st ~/.zshrc"
-#alias %{$FG[$CL_ALIAS]%}rmpyc%{$reset_color%} - removes *.pyc files recursively
-alias rmpyc="find . -iname '*.pyc' | xargs rm -rf"
 alias lsalias=list_aliasses
 alias lsl=lsalias
 
@@ -84,6 +80,14 @@ function simple_http_server() {
     python3 -m http.server $PORT
 }
 
+function clear_python_caches() {
+    find . -type d -name __pycache__ -exec rm -rf {} \+
+    find . -iname '*.pyc' | xargs rm -rf
+}
+
+#alias %{$FG[$CL_ALIAS]%}rmpyc%{$reset_color%} - removes *.pyc files recursively
+alias rmpyc=clear_python_caches
+
 #alias %{$FG[$CL_ALIAS]%}cdl%{$reset_color%} - cd and display directory contents
 alias cdl=cd_and_list
 
@@ -127,7 +131,15 @@ alias p3=python3
 
 #alias %{$FG[$CL_ALIAS]%}bs%{$reset_color%} - brew search
 alias bs="brew search"
+
 #alias %{$FG[$CL_ALIAS]%}bi%{$reset_color%} - brew install
 alias bi="brew install"
+
 #alias %{$FG[$CL_ALIAS]%}bic%{$reset_color%} - brew cask install
 alias bic="brew cask install"
+
+#alias %{$FG[$CL_ALIAS]%}edshell%{$reset_color%} - opens your .zshrc file in sublime
+alias edshell="st ~/.zshrc"
+
+#alias %{$FG[$CL_ALIAS]%}edalias%{$reset_color%} - opens your zsaliases file in sublime
+alias edalias="st ~/.zsaliases/zsaliases"
