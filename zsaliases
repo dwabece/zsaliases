@@ -113,11 +113,17 @@ alias portz=usedports
 #alias %{$FG[$CL_ALIAS]%}mkvirtualenv3%{$reset_color%} - creates python3 virtualenv
 alias mkvirtualenv3="mkvirtualenv --python=`which python3`"
 
+#alias %{$FG[$CL_ALIAS]%}workoff%{$reset_color%} - deactivates virtualenv
+alias workoff=deactivate
+
 #alias %{$FG[$CL_ALIAS]%}rmf%{$reset_color%} - alias for rm -rf
 alias rmf="rm -rf"
 
-#alias %{$FG[$CL_ALIAS]%}p%{$reset_color%} - runs python interpreter
-alias p=python3
+#alias %{$FG[$CL_ALIAS]%}p%{$reset_color%} - runs python2 interpreter
+#aliaz p=python
+
+#alias %{$FG[$CL_ALIAS]%}p3%{$reset_color%} - runs python3 interpreter
+alias p3=python3
 
 #alias %{$FG[$CL_ALIAS]%}bs%{$reset_color%} - brew search
 alias bs="brew search"
