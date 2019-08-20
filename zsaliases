@@ -83,6 +83,8 @@ function simple_http_server() {
 function clear_python_caches() {
     find . -type d -name __pycache__ -exec rm -rf {} \+
     find . -iname '*.pyc' | xargs rm -rf
+    find . -iname '*,cover' | xargs rm -rf
+    find . -iname '.coverage' | xargs rm -rf
 }
 
 #alias %{$FG[$CL_ALIAS]%}rmpyc%{$reset_color%} - removes *.pyc files recursively
