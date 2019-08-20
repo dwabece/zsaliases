@@ -4,4 +4,4 @@
 
 
 
-![aliases list](https://i.imgur.com/tKwVBBM.png)
+![aliases list](https://i.imgur.com/jAgvkgY.png)
