@@ -119,6 +119,9 @@ alias portz=usedports
 #alias %{$FG[$CL_ALIAS]%}mkvirtualenv3%{$reset_color%} - creates python3 virtualenv
 alias mkvirtualenv3="mkvirtualenv --python=`which python3`"
 
+#alias %{$FG[$CL_ALIAS]%}mkvirtualenv3%{$reset_color%} - creates python2 virtualenv
+alias mkvirtualenv2="mkvirtualenv --python=`which python2`"
+
 #alias %{$FG[$CL_ALIAS]%}workoff%{$reset_color%} - deactivates virtualenv
 alias workoff=deactivate
 
